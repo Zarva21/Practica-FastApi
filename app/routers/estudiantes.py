@@ -11,7 +11,7 @@ router = APIRouter(prefix="/estudiantes", tags=["Estudiantes"])
 def crear_estudiante(estudiante: EstudianteBase, db: Session = Depends(get_db)):
  db_est = db.query(EstudianteModel).filter(EstudianteModel.id == estudiante.id).first()
  if db_est:
- raise HTTPException(status_code=400, detail="El ID del estudiante ya existe.")
+    raise HTTPException(status_code=400, detail="El ID del estudiante ya existe.")
  nuevo_estudiante = EstudianteModel(**estudiante.model_dump())
  db.add(nuevo_estudiante)
  db.commit()
